@@ -1,0 +1,21 @@
+<table class="table">
+
+  <thead class="thead-dark">
+      <tr>
+          <th>Id</th>
+          <th>Nome</th>
+          <th>Valor</th>
+      </tr>
+  </thead>
+
+  <tbody>
+      <tr *ngFor="let tempItem of items">
+          <td class="align-middle">{{ tempItem.id}}</td>
+          <td class="align-middle">{{ tempItem.nome }}</td>
+          <td class="align-middle">{{ tempItem.valor}}</td>
+      </tr>
+  </tbody>
+
+</table>
+
+

@@ -1,0 +1,37 @@
+<table class="table">
+
+  <thead class="thead-dark">
+      <tr>
+          <th>Id</th>
+          <th>Nome</th>
+          <th>Valor</th>
+          <th>Update</th>
+          <th>Delete</th>
+      </tr>
+  </thead>
+
+  <tbody>
+      <tr *ngFor="let tempItem of items">
+          <td class="align-middle">{{ tempItem.id}}</td>
+          <td class="align-middle">
+            <input type="text" [(ngModel)]="tempItem.nome">
+          <td class="align-middle">{{ tempItem.valor}}</td>
+          <td class="align-middle"><button  class="btn btn-default" (click)="updateItem(tempItem)">Update</button></td>
+
+          <td class="align-middle"><button  class="btn btn-default" (click)="deleteItem(tempItem)">Delete</button></td>
+
+      </tr>
+  </tbody>
+
+</table>
+
+<div class="container">
+  <h2>Insert Item</h2>
+  <div>
+    Id: <input type="text" [(ngModel)]="novoItem.id"><br>
+    Nome: <input type="text" [(ngModel)]="novoItem.nome"><br>
+    Valor: <input type="text" [(ngModel)]="novoItem.valor">
+  </div>
+  <button  class="btn btn-default" (click)="insertNewItem()">Insert new Item</button>
+</div>
+
