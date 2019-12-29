@@ -21,8 +21,8 @@ export class ItemService {
   constructor(private httpClient: HttpClient) { }
 
   // GET Method - List all
-  getItemList(): Observable<Item> {
-    return this.httpClient.get<Item>(this.baseUrl);
+  getItemList(): Observable<Item[]> {
+    return this.httpClient.get<Item[]>(this.baseUrl);
   }
 
   // POST Method - insert new item
@@ -43,25 +43,11 @@ export class ItemService {
   updateItem(updatedItem: Item): Observable<any> {
     return this.httpClient.put(this.baseUrl, updatedItem, this.httpOptions);
   }
-
-  /* insertNewItem(newItem: Item){
-
-    console.log(this.httpClient.post<Item>(this.baseUrl, newItem, this.httpOptions));
-  }
- */
- /*  getItemList(): Observable<Item[]> {
-    return this.httpClient.get<GetResponse>(this.baseUrl).pipe(
-      map(response => response._embedded.items)
-    );
-  } */
 }
 
-
-
-
-
+/*
 interface GetResponse {
   _embedded: {
     items: Item[];
   };
-}
+} */

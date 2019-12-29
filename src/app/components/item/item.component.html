@@ -1,10 +1,12 @@
+<div class="container">
+<h1 class="mb-3 mt-3">Items</h1>
 <table class="table">
 
   <thead class="thead-dark">
       <tr>
           <th>Id</th>
-          <th>Nome</th>
-          <th>Valor</th>
+          <th>Name</th>
+          <th>Value</th>
           <th>Update</th>
           <th>Delete</th>
       </tr>
@@ -25,13 +27,23 @@
 
 </table>
 
-<div class="container">
-  <h2>Insert Item</h2>
-  <div>
-    Id: <input type="text" [(ngModel)]="novoItem.id"><br>
-    Nome: <input type="text" [(ngModel)]="novoItem.nome"><br>
-    Valor: <input type="text" [(ngModel)]="novoItem.valor">
-  </div>
-  <button  class="btn btn-default" (click)="insertNewItem()">Insert new Item</button>
-</div>
+<h2>Insert New Item</h2>
+  <table class="table" style="border-top: 1px solid black;" >
+    <tr>
+      <td width="50px">Id:</td>
+      <td><input type="text" [(ngModel)]="novoItem.id"></td>
+    </tr>
+    <tr>
+      <td>Name:</td>
+      <td><input type="text" [(ngModel)]="novoItem.nome"></td>
+    </tr>
+    <tr>
+      <td>Value:</td>
+      <td><input type="text" [(ngModel)]="novoItem.valor"></td>
+    </tr>
+    <tr>
+      <td colspan="2"><button  class="btn btn-default" (click)="insertNewItem()">Insert</button></td>
+    </tr>
+  </table>
 
+</div>

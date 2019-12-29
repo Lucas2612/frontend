@@ -1,0 +1,49 @@
+<div class="container">
+  <h1 class="mb-3 mt-3">Users</h1>
+  <table class="table">
+
+    <thead class="thead-dark">
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>E-mail</th>
+            <th>Update</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let tempUsuario of usuarios">
+            <td class="align-middle">{{ tempUsuario.id}}</td>
+            <td class="align-middle">
+              <input type="text" [(ngModel)]="tempUsuario.nome"></td>
+            <td class="align-middle">
+              <input type="text" [(ngModel)]="tempUsuario.email"></td>
+            <td class="align-middle"><button  class="btn btn-default" (click)="updateUsuario(tempUsuario)">Update</button></td>
+            <td class="align-middle"><button  class="btn btn-default" (click)="deleteUsuario(tempUsuario)">Delete</button></td>
+
+        </tr>
+    </tbody>
+
+  </table>
+
+  <h2>Insert New User</h2>
+    <table class="table" style="border-top: 1px solid black;" >
+      <tr>
+        <td width="50px">Id:</td>
+        <td><input type="text" [(ngModel)]="novoUsuario.id"></td>
+      </tr>
+      <tr>
+        <td>Name:</td>
+        <td><input type="text" [(ngModel)]="novoUsuario.nome"></td>
+      </tr>
+      <tr>
+        <td>E-mail:</td>
+        <td><input type="text" [(ngModel)]="novoUsuario.email"></td>
+      </tr>
+      <tr>
+        <td colspan="2"><button  class="btn btn-default" (click)="insertNewUsuario()">Insert</button></td>
+      </tr>
+    </table>
+
+  </div>

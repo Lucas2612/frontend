@@ -9,7 +9,7 @@ import { Item } from 'src/app/entity/item';
 })
 export class ItemComponent implements OnInit {
 
-  items;
+  items: Item[];
   novoItem = new Item();
 
   constructor(private itemService: ItemService) {
@@ -32,6 +32,7 @@ export class ItemComponent implements OnInit {
     // Calling the service to insert new item
     this.itemService.insertNewItem(this.novoItem).
     subscribe(novoItem => this.items.push(novoItem));
+    this.novoItem = new Item();
   }
 
   deleteItem(deletedItem: Item): void {
