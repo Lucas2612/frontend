@@ -1,0 +1,24 @@
+<div *ngIf="usuario">
+  Usuario: {{ usuario.nome }}
+</div>
+
+<table class="table">
+  <thead>
+    <tr><th>Item</th>
+        <th>Quantity</th></tr>
+  </thead>
+
+
+
+</table>
+
+
+<select [(ngModel)]="selectedItem" class="custom-select" (change)="changeItem()" >
+  <option value="">Select an item:</option>
+  <option *ngFor="let tempItem of items" [ngValue]="tempItem.id">{{tempItem.nome}}</option>
+</select>
+{{ selectedItem }}
+
+<button (click)="addItem()">Add Item</button>
+
+

@@ -9,6 +9,7 @@
             <th>E-mail</th>
             <th>Update</th>
             <th>Delete</th>
+            <th>Cart</th>
         </tr>
     </thead>
 
@@ -21,7 +22,7 @@
               <input type="text" [(ngModel)]="tempUsuario.email"></td>
             <td class="align-middle"><button  class="btn btn-default" (click)="updateUsuario(tempUsuario)">Update</button></td>
             <td class="align-middle"><button  class="btn btn-default" (click)="deleteUsuario(tempUsuario)">Delete</button></td>
-
+            <td><a routerLink="/carrinho/{{tempUsuario.id}}">Cart</a></td>
         </tr>
     </tbody>
 

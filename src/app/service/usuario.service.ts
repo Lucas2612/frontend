@@ -23,6 +23,11 @@ export class UsuarioService {
     return this.httpClient.get<Usuario[]>(this.baseUrl);
   }
 
+  // GET Method - One
+  getUsuario(id: number): Observable<Usuario> {
+    return this.httpClient.get<Usuario>(`${this.baseUrl}/${id}`);
+  }
+
   // POST Method - insert new usuario
   insertNewUsuario(newUsuario: Usuario): Observable<Usuario> {
     return this.httpClient.post<Usuario>(this.baseUrl, newUsuario, this.httpOptions);

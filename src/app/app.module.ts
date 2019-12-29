@@ -10,20 +10,28 @@ import { ItemComponent } from './components/item/item.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { UsuarioComponent } from './components/usuario/usuario.component';
 import { UsuarioService } from './service/usuario.service';
+import { AppRoutingModule } from './app-routing.module';
+import { MessagesComponent } from './components/messages/messages.component';
+import { MessageService } from './service/message.service';
+import { CarrinhoComponent } from './components/carrinho/carrinho.component';
+import { CarrinhoService } from './service/carrinho.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     ItemComponent,
-    UsuarioComponent
+    UsuarioComponent,
+    MessagesComponent,
+    CarrinhoComponent
   ],
   imports: [
     NgbModule,
     BrowserModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule
   ],
-  providers: [ItemService, UsuarioService],
+  providers: [ItemService, UsuarioService, MessageService, CarrinhoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
