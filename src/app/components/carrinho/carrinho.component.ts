@@ -9,6 +9,7 @@ import { UsuarioService } from 'src/app/service/usuario.service';
 import { ItemService } from 'src/app/service/item.service';
 import { Item } from 'src/app/entity/item';
 import { ItemCart } from 'src/app/entity/itemCart';
+import { MessageService } from 'src/app/service/message.service';
 
 @Component({
   selector: 'app-carrinho',
@@ -29,25 +30,42 @@ export class CarrinhoComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private carrinhoService: CarrinhoService, private usuarioService: UsuarioService,
               private itemService: ItemService,
-              private location: Location) { }
+              private messageService: MessageService
+              ) { }
 
   ngOnInit() {
     this.getCart();
+    this.getUsuario();
     this.listItems();
+    this.messageService.clear();
+    console.log('Carrinho init');
+  }
 
+  getUsuario() {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.usuarioService.getUsuario(id).subscribe(
+    usuario => {this.usuario = usuario; }
+    );
   }
 
   getCart() {
     const id = +this.route.snapshot.paramMap.get('id');
-    this.usuarioService.getUsuario(id).subscribe(
-      usuario => {this.usuario = usuario; }
-    );
     this.carrinhoService.getCarrinho(id).subscribe(
       cart => {this.cart = cart;
-      }
-    );
+               this.updateItems();
+      });
+    console.log(this.cart);
   }
 
+  updateItems() {
+    if (this.cart !== null) {
+      for (const itemCart of this.cart.itemCarts) {
+        this.itemService.getItem(itemCart.item.id).subscribe(
+          data => {itemCart.item = data; }
+        );
+      }
+    }
+  }
 
   listItems() {
     this.itemService.getItemList().subscribe(
@@ -56,47 +74,92 @@ export class CarrinhoComponent implements OnInit {
     );
   }
 
-   addItem() {
+  removeItem() {
     this.getCart();
     if (this.selectedItem) {
-        if (this.cart.idUsuario === this.usuario.id) {
-          console.log(this.cart);
-        } else {
-          // Post - Cart is empty
-          this.cart = new Cart();
-          this.cart.idUsuario = this.usuario.id;
-          this.cart.itemCarts = [];
-          const itemCart = new ItemCart();
-          itemCart.idItem = this.selectedItem;
-          itemCart.qtde = 1;
-          this.carrinhoService.addItemCarrinho(this.cart).subscribe(
-              cart => {this.cart = cart; }
-            );
+
+      if (this.cart !== null) {
+        let i = 0;
+        console.log(this.cart);
+        for (const itemCart of this.cart.itemCarts) {
+          if (itemCart.item.id === this.selectedItem) {
+            // item exists
+            // verify if ==1
+            if (itemCart.qtde === 1) {
+              // remove
+              this.cart.itemCarts.splice(i, 1);
+            } else {
+              // minus 1
+              itemCart.qtde -= 1;
+            }
+          }
+          i++;
         }
-      // post
-      // else
-      // put
-
-      /* this.cart.idUsuario = 10;
-
-      const itemCart = new ItemCart();
-      itemCart.idItem = 12;
-      itemCart.qtde = 1;
-      this.cart.itemCarts.push(itemCart);
-      itemCart.idItem = 4;
-      itemCart.qtde = 1;
-      this.cart.itemCarts.push(itemCart);
-
-      console.log(this.cart);
-      // Item {id: "99", nome: "testet", valor: "50"}
-      console.log(this.item);
-
-      this.carrinhoService.addItemCarrinho(this.cart).subscribe(
-
-      ); */
-
+        if (this.cart.itemCarts.length === 0) {
+          // remove cart
+          this.carrinhoService.deleteCart(this.cart).subscribe(
+            cart => { this.cart = new Cart(); }
+          );
+        } else {
+          // put
+          this.carrinhoService.changeQtde(this.cart).subscribe(
+            cart => {this.cart = cart; }
+        );
+        }
+        console.log(this.cart);
+      }
     }
   }
+
+  addItem() {
+  this.getCart();
+  if (this.selectedItem) {
+    console.log('selecteditem: ' + this.selectedItem);
+    // cart exists
+    console.log('cart: ' + this.cart);
+    if (this.cart !== null) {
+      // check if item exists
+      for (const itemCart of this.cart.itemCarts) {
+        if (itemCart.item.id === this.selectedItem) {
+          console.log('item exists');
+          itemCart.qtde += 1;
+          this.carrinhoService.changeQtde(this.cart).subscribe(
+            cart => {this.cart = cart; }
+        );
+          this.getCart();
+          return;
+        }
+      }
+
+      console.log('item doesnt exist');
+      // item doesn't exist
+      const newItemCart = new ItemCart();
+      newItemCart.item.id = this.selectedItem;
+      newItemCart.qtde = 1;
+      this.cart.itemCarts.push(newItemCart);
+      this.carrinhoService.changeQtde(this.cart).subscribe(
+        cart => {this.cart = cart; }
+    );
+
+
+      console.log(this.cart);
+      } else {
+        // Post - Cart is empty
+        this.cart = new Cart();
+        this.cart.id = this.usuario.id;
+        this.cart.itemCarts = [];
+        const newItemCart = new ItemCart();
+        newItemCart.item.id = this.selectedItem;
+        newItemCart.qtde = 1;
+        this.cart.itemCarts.push(newItemCart);
+        this.carrinhoService.addItemNovoCarrinho(this.cart).subscribe(
+            cart => {this.cart = cart; }
+        );
+      }
+    }
+  this.getCart();
+  }
+
   changeItem() {
     this.selectedItem = +this.selectedItem;
   }

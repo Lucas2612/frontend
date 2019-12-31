@@ -11,4 +11,8 @@ export class MessageService {
     this.message = messagem;
   }
 
+  clear() {
+    this.message = '';
+  }
+
 }

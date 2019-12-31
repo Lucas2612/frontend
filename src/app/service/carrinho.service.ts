@@ -22,7 +22,7 @@ export class CarrinhoService {
   constructor(private httpClient: HttpClient, private messageService: MessageService) { }
 
   getCarrinho(usuarioId: number): Observable<Cart> {
-    return this.httpClient.get<Cart>(this.baseUrl).pipe(
+    return this.httpClient.get<Cart>(`${this.baseUrl}/${usuarioId}`).pipe(
       catchError(this.handleError<Cart>('getCart'))
     );
   }
@@ -35,9 +35,25 @@ export class CarrinhoService {
   } */
 
   // POST Method - insert new carrinho
-  addItemCarrinho(newCarrinho: Cart): Observable<Cart> {
+  addItemNovoCarrinho(newCarrinho: Cart): Observable<Cart> {
+    console.log('POST CART');
     return this.httpClient.post<Cart>(this.baseUrl, newCarrinho, this.httpOptions)
     ;
+  }
+
+  // PUT
+  // UPDATE
+  changeQtde(updatedCart: Cart): Observable<any> {
+    console.log('PUT CART');
+    return this.httpClient.put(this.baseUrl, updatedCart, this.httpOptions);
+  }
+
+  // DELETE
+  deleteCart(deletedCart: Cart | number) {
+    const id = typeof deletedCart === 'number' ? deletedCart : deletedCart.id;
+    const url = `${this.baseUrl}/${id}`;
+
+    return this.httpClient.delete<Cart>(url, this.httpOptions);
   }
 
  /*  insertNewItem(newItem: Item): Observable<Item> {

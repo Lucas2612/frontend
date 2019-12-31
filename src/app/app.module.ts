@@ -15,6 +15,10 @@ import { MessagesComponent } from './components/messages/messages.component';
 import { MessageService } from './service/message.service';
 import { CarrinhoComponent } from './components/carrinho/carrinho.component';
 import { CarrinhoService } from './service/carrinho.service';
+import { CompraComponent } from './components/compra/compra.component';
+import { CompraService } from './service/compra.service';
+import { GrupoComponent } from './components/grupo/grupo.component';
+import { GrupoService } from './service/grupo.service';
 
 @NgModule({
   declarations: [
@@ -22,7 +26,9 @@ import { CarrinhoService } from './service/carrinho.service';
     ItemComponent,
     UsuarioComponent,
     MessagesComponent,
-    CarrinhoComponent
+    CarrinhoComponent,
+    CompraComponent,
+    GrupoComponent
   ],
   imports: [
     NgbModule,
@@ -31,7 +37,8 @@ import { CarrinhoService } from './service/carrinho.service';
     FormsModule,
     AppRoutingModule
   ],
-  providers: [ItemService, UsuarioService, MessageService, CarrinhoService],
+  providers: [ItemService, UsuarioService, MessageService,
+    CarrinhoService, CompraService, GrupoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

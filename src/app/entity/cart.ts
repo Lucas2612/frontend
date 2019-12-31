@@ -1,6 +1,6 @@
 import { ItemCart } from './itemCart';
 
 export class Cart {
-  idUsuario: number;
+  id: number;
   itemCarts: ItemCart[];
 }

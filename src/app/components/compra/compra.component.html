@@ -1,0 +1,25 @@
+<h1>Carrinho Fechado</h1>
+
+<h5 *ngIf="usuario"> Usuário: {{ usuario.nome }}</h5>
+
+<table class="table" *ngIf="compras">
+  <thead>
+    <tr>
+      <th>Item</th>
+      <th>Valor Unitário</th>
+      <th>Quantidade</th>
+      <th>Valor Total</th>
+      </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let compra of compras">
+      <td>{{ compra.nome }}</td>
+      <td>{{ compra.valorUnitario }}</td>
+      <td>{{ compra.qtde }}</td>
+      <td>{{ compra.valorTotal }}</td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr><td class="align-right" colspan="=4">Total: {{ getTotal() }}</td></tr>
+  </tfoot>
+</table>

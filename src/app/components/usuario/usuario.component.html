@@ -1,7 +1,6 @@
 <div class="container">
-  <h1 class="mb-3 mt-3">Users</h1>
+  <h3 class="mb-3 mt-3">Users</h3>
   <table class="table">
-
     <thead class="thead-dark">
         <tr>
             <th>Id</th>
@@ -12,7 +11,6 @@
             <th>Cart</th>
         </tr>
     </thead>
-
     <tbody>
         <tr *ngFor="let tempUsuario of usuarios">
             <td class="align-middle">{{ tempUsuario.id}}</td>
@@ -25,13 +23,12 @@
             <td><a routerLink="/carrinho/{{tempUsuario.id}}">Cart</a></td>
         </tr>
     </tbody>
-
   </table>
 
-  <h2>Insert New User</h2>
+  <h3>Insert New User</h3>
     <table class="table" style="border-top: 1px solid black;" >
       <tr>
-        <td width="50px">Id:</td>
+        <td>Id:</td>
         <td><input type="text" [(ngModel)]="novoUsuario.id"></td>
       </tr>
       <tr>

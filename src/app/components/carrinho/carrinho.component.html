@@ -1,17 +1,26 @@
 <div *ngIf="usuario">
   Usuario: {{ usuario.nome }}
+  <p><a routerLink="/compra/{{usuario.id}}">Fechar Carrinho</a></p>
 </div>
 
-<table class="table">
+
+<table class="table" *ngIf="cart">
   <thead>
-    <tr><th>Item</th>
+    <tr>
+      <th>Id</th>
+      <th>Item</th>
         <th>Quantity</th></tr>
   </thead>
-
+  <tbody>
+    <tr *ngFor="let itemCart of cart.itemCarts">
+      <td>{{ itemCart.item.id }}</td>
+      <td>{{ itemCart.item.nome }}</td>
+      <td>{{ itemCart.qtde }}</td>
+    </tr>
+  </tbody>
 
 
 </table>
-
 
 <select [(ngModel)]="selectedItem" class="custom-select" (change)="changeItem()" >
   <option value="">Select an item:</option>
@@ -20,5 +29,8 @@
 {{ selectedItem }}
 
 <button (click)="addItem()">Add Item</button>
+<button (click)="removeItem()">Remove Item</button>
 
+
+<app-item></app-item>
 

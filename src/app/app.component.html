@@ -1,10 +1,18 @@
-<div class="container">
-<h3 class="m-50 p-50">{{title}}</h3>
-<nav>
-  <a routerLink="/item">Item</a>
-  <a routerLink="/usuario">Usuario</a>
-</nav>
+<div class="container" >
+  <div class="container" style="border: 1px solid" black>
+    <h2 align="center" class="m-50 p-50">{{ title }}</h2>
+    <div class="container align-center">
+    <nav style="border: 1px solid" >
+      <a routerLink="/item">Item</a>
+      <a routerLink="/usuario">Usuario</a>
+    </nav>
+    </div>
+  </div>
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
+  <div style="height: 50px;">
+    <app-messages></app-messages>
+  </div>
 </div>
-<router-outlet></router-outlet>
-<app-messages></app-messages>
 

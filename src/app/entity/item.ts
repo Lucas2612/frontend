@@ -1,5 +1,5 @@
 export class Item {
   id: number;
-  nome: string;
+  nome = '';
   valor: number;
 }
