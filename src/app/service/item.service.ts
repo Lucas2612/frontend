@@ -42,7 +42,7 @@ export class ItemService {
     console.log(newItem);
     return this.httpClient.post<Item>(this.baseUrl, newItem, this.httpOptions)
     .pipe(
-      tap(_ => this.messageService.add(`inserted item w/ id=${newItem.id}`)),
+      tap(_ => this.messageService.add(`inserted item id=${newItem.id}`)),
       catchError(this.handleError<Item>('inserting Item'))
     )
     ;
@@ -69,7 +69,7 @@ export class ItemService {
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       // sending  message
-      console.error(error);
+      // console.error(error);
       this.messageService.add(`${operation} failed`);
       return null;
     };
