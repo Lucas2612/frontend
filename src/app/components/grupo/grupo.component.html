@@ -1,1 +1,20 @@
-<p>grupo works!</p>
+<h1>Todos os Carrinhos</h1>
+
+
+<table class="table" *ngIf="grupos">
+  <thead>
+    <tr>
+      <th>Usuario</th>
+      <th>Valor Total</th>
+      </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let grupo of grupos">
+      <td>{{ grupo.usuario }}</td>
+      <td>{{ grupo.valorTotal  | currency:'USD'}}</td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr><td class="align-right" colspan="=4">Total: {{ getTotal()  | currency:'USD'}}</td></tr>
+  </tfoot>
+</table>

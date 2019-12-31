@@ -1,6 +1,7 @@
 <h1>Carrinho Fechado</h1>
 
 <h5 *ngIf="usuario"> Usuário: {{ usuario.nome }}</h5>
+<button (click)="voltar()">Voltar para edição do carrinho</button>
 
 <table class="table" *ngIf="compras">
   <thead>
@@ -14,12 +15,12 @@
   <tbody>
     <tr *ngFor="let compra of compras">
       <td>{{ compra.nome }}</td>
-      <td>{{ compra.valorUnitario }}</td>
+      <td>{{ compra.valorUnitario | currency:'USD' }}</td>
       <td>{{ compra.qtde }}</td>
-      <td>{{ compra.valorTotal }}</td>
+      <td>{{ compra.valorTotal  | currency:'USD'}}</td>
     </tr>
   </tbody>
   <tfoot>
-    <tr><td class="align-right" colspan="=4">Total: {{ getTotal() }}</td></tr>
+    <tr><td class="align-right" colspan="=4">Total: {{ getTotal() | currency:'USD' }}</td></tr>
   </tfoot>
 </table>

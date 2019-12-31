@@ -38,7 +38,7 @@ import { GrupoService } from './service/grupo.service';
     AppRoutingModule
   ],
   providers: [ItemService, UsuarioService, MessageService,
-    CarrinhoService, CompraService, GrupoService],
+    CarrinhoService, CompraService, GrupoService, CarrinhoComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

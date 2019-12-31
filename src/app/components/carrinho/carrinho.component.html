@@ -1,3 +1,5 @@
+<h1>Ediçao do carrinho</h1>
+
 <div *ngIf="usuario">
   Usuario: {{ usuario.nome }}
   <p><a routerLink="/compra/{{usuario.id}}">Fechar Carrinho</a></p>
@@ -31,6 +33,6 @@
 <button (click)="addItem()">Add Item</button>
 <button (click)="removeItem()">Remove Item</button>
 
-
-<app-item></app-item>
+<button (click)="show = !show">Show / Hide Items</button>
+<app-item *ngIf="show"></app-item>
 

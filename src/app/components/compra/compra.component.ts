@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CompraService } from 'src/app/service/compra.service';
 import { Compra } from 'src/app/entity/compra';
-import { conditionallyCreateMapObjectLiteral } from '@angular/compiler/src/render3/view/util';
+import {Location} from '@angular/common';
 import { UsuarioService } from 'src/app/service/usuario.service';
 
 @Component({
@@ -12,12 +12,13 @@ import { UsuarioService } from 'src/app/service/usuario.service';
 })
 export class CompraComponent implements OnInit {
 
-  compras;
+  compras: Compra[];
   usuario;
 
   constructor(private route: ActivatedRoute,
               private compraService: CompraService,
-              private usuarioService: UsuarioService) { }
+              private usuarioService: UsuarioService,
+              private location: Location) { }
 
   ngOnInit() {
     this.getCompras();
@@ -45,5 +46,9 @@ export class CompraComponent implements OnInit {
     this.usuarioService.getUsuario(id).subscribe(
     usuario => {this.usuario = usuario; }
     );
+  }
+
+  voltar(): void {
+    this.location.back();
   }
 }

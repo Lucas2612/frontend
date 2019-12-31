@@ -24,6 +24,7 @@ export class CarrinhoComponent implements OnInit {
   id;
   selectedItem: number;
   items: Item[];
+  show: boolean;
 
 
 
@@ -34,23 +35,24 @@ export class CarrinhoComponent implements OnInit {
               ) { }
 
   ngOnInit() {
-    this.getCart();
-    this.getUsuario();
-    this.listItems();
-    this.messageService.clear();
-    console.log('Carrinho init');
+    this.id = +this.route.snapshot.paramMap.get('id');
+    if (this.id !== 0) {
+      this.getCart();
+      this.getUsuario();
+      this.listItems();
+      this.messageService.clear();
+      console.log('Carrinho init');
+    }
   }
 
   getUsuario() {
-    const id = +this.route.snapshot.paramMap.get('id');
-    this.usuarioService.getUsuario(id).subscribe(
+    this.usuarioService.getUsuario(this.id).subscribe(
     usuario => {this.usuario = usuario; }
     );
   }
 
   getCart() {
-    const id = +this.route.snapshot.paramMap.get('id');
-    this.carrinhoService.getCarrinho(id).subscribe(
+    this.carrinhoService.getCarrinho(this.id).subscribe(
       cart => {this.cart = cart;
                this.updateItems();
       });
@@ -77,19 +79,23 @@ export class CarrinhoComponent implements OnInit {
   removeItem() {
     this.getCart();
     if (this.selectedItem) {
-
       if (this.cart !== null) {
+        console.log('cart is not null');
         let i = 0;
         console.log(this.cart);
         for (const itemCart of this.cart.itemCarts) {
+          console.log('loop items');
           if (itemCart.item.id === this.selectedItem) {
+            console.log('achou');
             // item exists
             // verify if ==1
             if (itemCart.qtde === 1) {
               // remove
+              console.log('remove');
               this.cart.itemCarts.splice(i, 1);
             } else {
               // minus 1
+              console.log('minus 1');
               itemCart.qtde -= 1;
             }
           }
@@ -97,11 +103,14 @@ export class CarrinhoComponent implements OnInit {
         }
         if (this.cart.itemCarts.length === 0) {
           // remove cart
+          console.log('remove cart');
           this.carrinhoService.deleteCart(this.cart).subscribe(
-            cart => { this.cart = new Cart(); }
+            cart => { this.cart = new Cart();
+                      this.getCart(); }
           );
         } else {
           // put
+          console.log('minus 1');
           this.carrinhoService.changeQtde(this.cart).subscribe(
             cart => {this.cart = cart; }
         );
@@ -117,16 +126,20 @@ export class CarrinhoComponent implements OnInit {
     console.log('selecteditem: ' + this.selectedItem);
     // cart exists
     console.log('cart: ' + this.cart);
-    if (this.cart !== null) {
+    if (this.cart != null ) {
+      if (this.cart.itemCarts == null ) {
+        console.log('null');
+      }
       // check if item exists
+      console.log(this.cart.itemCarts);
       for (const itemCart of this.cart.itemCarts) {
         if (itemCart.item.id === this.selectedItem) {
           console.log('item exists');
           itemCart.qtde += 1;
           this.carrinhoService.changeQtde(this.cart).subscribe(
-            cart => {this.cart = cart; }
+            cart => {this.cart = cart;
+                     this.getCart(); }
         );
-          this.getCart();
           return;
         }
       }
@@ -138,7 +151,8 @@ export class CarrinhoComponent implements OnInit {
       newItemCart.qtde = 1;
       this.cart.itemCarts.push(newItemCart);
       this.carrinhoService.changeQtde(this.cart).subscribe(
-        cart => {this.cart = cart; }
+        cart => {this.cart = cart;
+                 this.getCart(); }
     );
 
 
@@ -153,11 +167,11 @@ export class CarrinhoComponent implements OnInit {
         newItemCart.qtde = 1;
         this.cart.itemCarts.push(newItemCart);
         this.carrinhoService.addItemNovoCarrinho(this.cart).subscribe(
-            cart => {this.cart = cart; }
+            cart => {this.cart = cart;
+                     this.getCart(); }
         );
       }
     }
-  this.getCart();
   }
 
   changeItem() {

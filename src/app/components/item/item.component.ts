@@ -48,7 +48,9 @@ export class ItemComponent implements OnInit {
 
   deleteItem(deletedItem: Item): void {
     this.items = this.items.filter(h => h !== deletedItem);
-    this.itemService.deleteItem(deletedItem).subscribe();
+    this.itemService.deleteItem(deletedItem).subscribe(
+        data => { this.carrinhoComponent.ngOnInit(); }
+    );
   }
 
   updateItem(updatedItem: Item): void {
