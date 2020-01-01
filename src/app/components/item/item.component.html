@@ -1,5 +1,11 @@
 <div style="width:500px" class="container"  >
 <h3 >Items</h3>
+<div>
+  <label>Search item:
+    <input class="form-control" type="text" name="search"
+    [(ngModel)]="searchText" autocomplete="off">
+  </label>
+</div>
 <table class="table">
 
   <thead class="thead-dark">
@@ -13,7 +19,7 @@
   </thead>
 
   <tbody>
-      <tr *ngFor="let tempItem of items">
+      <tr *ngFor="let tempItem of items | filter:searchText">
           <td class="align-middle">{{ tempItem.id}}</td>
           <td class="align-middle">
             <input type="text" [(ngModel)]="tempItem.nome"></td>

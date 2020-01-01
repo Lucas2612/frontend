@@ -13,6 +13,7 @@ export class ItemComponent implements OnInit {
 
   items: Item[];
   novoItem = new Item();
+  searchText;
 
   constructor(private itemService: ItemService,
               private messageService: MessageService,
@@ -57,4 +58,5 @@ export class ItemComponent implements OnInit {
     this.itemService.updateItem(updatedItem)
       .subscribe();
   }
+
 }

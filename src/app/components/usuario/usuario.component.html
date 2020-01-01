@@ -1,5 +1,11 @@
 <div class="container">
   <h3 class="mb-3 mt-3">Users</h3>
+  <div>
+    <label>Search user:
+      <input class="form-control" type="text" name="search"
+      [(ngModel)]="searchText" autocomplete="off">
+    </label>
+  </div>
   <table class="table">
     <thead class="thead-dark">
         <tr>
@@ -12,7 +18,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let tempUsuario of usuarios">
+        <tr *ngFor="let tempUsuario of usuarios | filter:searchText">
             <td class="align-middle">{{ tempUsuario.id}}</td>
             <td class="align-middle">
               <input type="text" [(ngModel)]="tempUsuario.nome"></td>

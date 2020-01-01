@@ -12,6 +12,7 @@ export class UsuarioComponent implements OnInit {
 
   usuarios: Usuario[];
   novoUsuario = new Usuario();
+  searchText;
 
   constructor(private usuarioService: UsuarioService, private messageService: MessageService) { }
 

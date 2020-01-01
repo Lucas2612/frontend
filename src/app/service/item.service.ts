@@ -76,10 +76,3 @@ export class ItemService {
   }
 }
 
-
-/*
-interface GetResponse {
-  _embedded: {
-    items: Item[];
-  };
-} */

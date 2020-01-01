@@ -19,6 +19,8 @@ import { CompraComponent } from './components/compra/compra.component';
 import { CompraService } from './service/compra.service';
 import { GrupoComponent } from './components/grupo/grupo.component';
 import { GrupoService } from './service/grupo.service';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
 
 @NgModule({
   declarations: [
@@ -35,7 +37,8 @@ import { GrupoService } from './service/grupo.service';
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    Ng2SearchPipeModule
   ],
   providers: [ItemService, UsuarioService, MessageService,
     CarrinhoService, CompraService, GrupoService, CarrinhoComponent],
