@@ -1,5 +1,7 @@
 # Frontend
 
+(primeiro instalar o backend em https://github.com/Lucas2612/backend)
+
 1. Instalar node.js e @angular/cli
 
 2. Clonar o projeto:
