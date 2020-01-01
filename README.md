@@ -6,7 +6,9 @@
 git clone https://github.com/Lucas2612/frontend
 
 3. Na pasta do projeto executar o comando:
+
 npm install
+
 ng serve --open
 
 4. O navegador vai abrir a aplicação na porta 4200.
